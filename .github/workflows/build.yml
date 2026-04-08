@@ -35,8 +35,8 @@ jobs:
 
       - name: Setup Gradle wrapper (force 7.6.4)
         run: |
-          ./gradlew wrapper --gradle-version 7.6.4 --distribution-type bin
           chmod +x gradlew
+          ./gradlew wrapper --gradle-version 7.6.4 --distribution-type bin
 
       - name: Get version and release flag
         id: set_version
@@ -63,7 +63,7 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            *.jar
+            build/libs/*.jar
           if-no-files-found: error
 
       - name: Upload assets to release
@@ -72,6 +72,6 @@ jobs:
         with:
           tag_name: v${{ steps.set_version.outputs.version }}
           files: |
-            *.jar
+            build/libs/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
