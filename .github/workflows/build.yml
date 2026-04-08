@@ -63,7 +63,7 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            build/libs/*.jar
+            *.jar
           if-no-files-found: error
 
       - name: Upload assets to release
@@ -72,6 +72,6 @@ jobs:
         with:
           tag_name: v${{ steps.set_version.outputs.version }}
           files: |
-            build/libs/*.jar
+            *.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
